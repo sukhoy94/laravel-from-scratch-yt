@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 Route::get('/hello-world/{userName}', [HelloWorldController::class, 'index']);
 Route::get('/hello-world-two', [HelloWorldController::class, 'two']);
+
+Route::view('/about', 'about', ['name' => 'Andrew']);
