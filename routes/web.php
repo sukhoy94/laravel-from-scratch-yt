@@ -19,6 +19,18 @@ Route::get('/', function () {
 });
 
 Route::get('/hello-world/{userName}', [HelloWorldController::class, 'index']);
+
 Route::get('/hello-world-two', [HelloWorldController::class, 'two']);
 
 Route::view('/about', 'about', ['name' => 'Andrew']);
+
+
+Route::get('/user/{name}', function (string $name) {
+    return 'route for letters';
+})->where('name', '[A-Za-z]+');
+
+Route::get('/user/{id}', function (string $id) {
+    return 'route for numbers';
+
+})->where('id', '[0-9]+');
+
