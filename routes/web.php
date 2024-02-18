@@ -18,19 +18,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello-world/{userName}', [HelloWorldController::class, 'index']);
+//Route::get('/hello-world/{userName}', [HelloWorldController::class, 'index']);
+//Route::get('/hello-world-two', [HelloWorldController::class, 'two']);
 
-Route::get('/hello-world-two', [HelloWorldController::class, 'two']);
+Route::controller(HelloWorldController::class)->group(function() {
+    Route::get('/hello-world/{userName}', 'index');
+    Route::get('/hello-world-two', 'two');
+});
+
+
+
 
 Route::view('/about', 'about', ['name' => 'Andrew']);
 
+Route::prefix('administrator')->group(function() {
+    Route::name('users.')->group(function() {
+        Route::get('/user/{name}', function (string $name) {
+            return 'route for letters';
+        })->where('name', '[A-Za-z]+')->name('user-with-letters');
 
-Route::get('/user/{name}', function (string $name) {
-    return 'route for letters';
-})->where('name', '[A-Za-z]+');
+        Route::get('/user/{id}', function (string $id) {
+            return 'route for numbers';
+        })->where('id', '[0-9]+')->name('user-with-numeric-id');
+    });
+});
 
-Route::get('/user/{id}', function (string $id) {
-    return 'route for numbers';
 
-})->where('id', '[0-9]+');
+
+
 
