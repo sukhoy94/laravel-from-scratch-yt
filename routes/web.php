@@ -44,6 +44,8 @@ Route::prefix('administrator')->group(function() {
 });
 
 
+Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index']);
+Route::resource('photos', \App\Http\Controllers\PhotoController::class);
 
 
 
